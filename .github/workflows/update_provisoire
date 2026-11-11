@@ -1,1 +1,11 @@
 
+      - name: Install requests
+        run: |
+          pip install requests
+
+      - name: Generate bulletin
+        run: |
+          python scripts/balise_andran.py
+      - name: Show bulletin
+        run: |
+          cat bulletin.txt
