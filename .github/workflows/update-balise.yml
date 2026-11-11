@@ -28,7 +28,15 @@ jobs:
 
       - name: Install requests
         run: |
-          pip install requests    
+          pip install requests
+
+      - name: Install Piper
+        run: |
+          pip install piper-tts
+
+            - name: Test Piper
+        run: |
+          piper --help
 
       - name: Generate bulletin
         run: |
