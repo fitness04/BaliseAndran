@@ -1,5 +1,8 @@
 name: Balise Andran
 
+permissions:
+  contents: write
+
 on:
 
   workflow_dispatch:
@@ -32,11 +35,13 @@ jobs:
         run: |
           echo "Balise Andran OK" > test.txt
 
-      - name: Commit
+            - name: Commit
         run: |
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add test.txt
-          git commit -m "Test workflow" || true
+          git add .
+
+          git commit -m "Test workflow" || exit 0
+
           git push
