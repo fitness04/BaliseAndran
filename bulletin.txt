@@ -1,12 +1,1 @@
-
-BALISE ANDRAN
-
-Bulletin expérimental
-
-Date :
-2026-11-11 13:34:21.689428
-
-Vérification du fonctionnement
-GitHub Actions.
-
-Fin de bulletin.
+Balise de l'Andran, ouest sud ouest, 4 kilomètre heure, 8 maximum.
