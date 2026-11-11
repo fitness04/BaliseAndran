@@ -3,12 +3,16 @@ from datetime import datetime
 texte = f"""
 Balise Andran
 
-Test GitHub Actions
+Essai GitHub Actions
 
+Date :
 {datetime.now()}
 """
 
-with open("bulletin.txt", "w", encoding="utf-8") as f:
+with open(
+    "bulletin.txt",
+    "w",
+    encoding="utf-8") as f:
     f.write(texte)
 
-print("bulletin généré")
+print("bulletin.txt généré")
