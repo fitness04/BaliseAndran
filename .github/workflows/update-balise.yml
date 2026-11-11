@@ -34,7 +34,7 @@ jobs:
         run: |
           pip install piper-tts
 
-            - name: Test Piper
+      - name: Test Piper
         run: |
           piper --help
 
