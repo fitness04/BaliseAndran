@@ -1,11 +1,69 @@
+name: Balise Andran
 
-      - name: Install requests
-        run: |
-          pip install requests
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
 
-      - name: Generate bulletin
+permissions:
+  contents: write
+
+concurrency:
+  group: balise-andran
+  cancel-in-progress: false
+
+jobs:
+  balise:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Installer Python et FFmpeg
         run: |
-          python scripts/balise_andran.py
-      - name: Show bulletin
+          python -m pip install --upgrade pip
+          python -m pip install requests piper-tts
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+
+      - name: Vérifier les fichiers et les outils
         run: |
-          cat bulletin.txt
+          test -f scripts/balise_andran.py
+          test -f models/model.onnx
+          test -f models/model.onnx.json
+          python -m piper --help
+          ffmpeg -version
+
+      - name: Générer le bulletin
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: python scripts/balise_andran.py
+
+      - name: Vérifier le résultat
+        run: |
+          test -s BaliseAndran.mp3
+          test -s phrase.txt
+          ls -lh BaliseAndran.mp3
+          cat phrase.txt
+
+      - name: Enregistrer le bulletin dans le dépôt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add -- BaliseAndran.mp3 phrase.txt balise_andran.log
+
+          if git diff --cached --quiet; then
+            echo "Aucune modification à enregistrer."
+            exit 0
+          fi
+
+          git commit -m "Update bulletin"
+          git push
