@@ -24,6 +24,22 @@ jobs:
           ref: main
           fetch-depth: 0
 
+      - name: Télécharger la voix Piper
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          mkdir -p models
+
+          gh release download voix-v1 \
+            --pattern "model.onnx" \
+            --pattern "model.onnx.json" \
+            --dir models \
+            --clobber
+
+          echo "=== Fichiers téléchargés ==="
+          ls -lh models/   
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
