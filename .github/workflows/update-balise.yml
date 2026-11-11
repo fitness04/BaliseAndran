@@ -18,7 +18,7 @@ jobs:
 
       - name: Create file
         run: |
-          echo "Bonjour Balise Andran" > test.txt
+          python scripts/test.py
 
       - name: Commit
         run: |
