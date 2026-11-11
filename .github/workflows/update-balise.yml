@@ -31,7 +31,7 @@ jobs:
         run: |
           mkdir -p models
 
-          gh release download voix-v1 \
+          gh release download Voix-Piper-Andran \
             --pattern "model.onnx" \
             --pattern "model.onnx.json" \
             --dir models \
