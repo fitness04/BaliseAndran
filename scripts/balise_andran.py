@@ -1,18 +1,23 @@
 from datetime import datetime
 
-texte = f"""
-Balise Andran
+bulletin = f"""
+BALISE ANDRAN
 
-Essai GitHub Actions
+Bulletin expérimental
 
 Date :
 {datetime.now()}
+
+Vérification du fonctionnement
+GitHub Actions.
+
+Fin de bulletin.
 """
 
 with open(
     "bulletin.txt",
     "w",
     encoding="utf-8") as f:
-    f.write(texte)
+    f.write(bulletin)
 
 print("bulletin.txt généré")
