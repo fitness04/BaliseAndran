@@ -33,12 +33,36 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y ffmpeg
 
-      - name: Vérifier les fichiers et les outils
+        - name: Vérifier les fichiers et les outils
         run: |
-          test -f scripts/balise_andran.py
-          test -f models/model.onnx
-          test -f models/model.onnx.json
+          echo "=== Dossier de travail ==="
+          pwd
+
+          echo "=== Vérification des fichiers ==="
+          manque=0
+
+          for fichier in \
+            scripts/balise_andran.py \
+            models/model.onnx \
+            models/model.onnx.json
+          do
+            if [ -f "$fichier" ]; then
+              echo "OK : $fichier"
+              ls -lh "$fichier"
+            else
+              echo "::error::Fichier absent : $fichier"
+              manque=1
+            fi
+          done
+
+          if [ "$manque" -ne 0 ]; then
+            exit 1
+          fi
+
+          echo "=== Vérification Piper ==="
           python -m piper --help
+
+          echo "=== Vérification FFmpeg ==="
           ffmpeg -version
 
       - name: Générer le bulletin
