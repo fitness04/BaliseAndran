@@ -96,19 +96,29 @@ jobs:
           ls -lh BaliseAndran.mp3
           cat phrase.txt
 
-      - name: Enregistrer le bulletin dans le dépô
+      - name: Enregistrer le bulletin dans le dépôt
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git add -- BaliseAndran.mp3 phrase.txt balise_andran.log
+          echo "=== État des fichiers avant enregistrement ==="
+          git status --short
+
+          git add -- \
+            BaliseAndran.mp3 \
+            phrase.txt \
+            bulletin.txt \
+            balise_andran.log
 
           if git diff --cached --quiet; then
-            echo "Aucune modification à enregistrer."
+            echo "Aucune modification du bulletin à enregistrer."
             exit 0
           fi
 
           git commit -m "Update bulletin"
 
-          git pull --rebase origin main
+          echo "=== Modifications restantes ==="
+          git status --short
+
+          git pull --rebase --autostash origin main
           git push origin main
