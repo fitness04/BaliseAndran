@@ -180,3 +180,16 @@
 [2026-11-13 20:16:08 UTC] Conversion MP3
 [2026-11-13 20:16:08 UTC] MP3 généré avec succès (45 Ko)
 [2026-11-13 20:16:08 UTC] ===== FIN NORMALE =====
+[2026-11-13 20:31:25 UTC] ===== DÉMARRAGE =====
+[2026-11-13 20:31:25 UTC] Dossier de travail : /home/runner/work/BaliseAndran/BaliseAndran
+[2026-11-13 20:31:25 UTC] Lecture balise WindBird 2031
+[2026-11-13 20:31:27 UTC] Heure mesure : 13/11/2026 20:30:58 UTC
+[2026-11-13 20:31:27 UTC] Age mesure = 0.5 minutes
+[2026-11-13 20:31:27 UTC] Etat mesure : VALIDE
+[2026-11-13 20:31:27 UTC] Direction=22° Vent=5 km/h Rafale=6 km/h
+[2026-11-13 20:31:27 UTC] Phrase : Balise de l'Andran, nord nord èst, 5 kilomètre heure, 6 maximum.
+[2026-11-13 20:31:27 UTC] Génération WAV
+[2026-11-13 20:31:28 UTC] Ajout silence début 500 ms
+[2026-11-13 20:31:28 UTC] Conversion MP3
+[2026-11-13 20:31:28 UTC] MP3 généré avec succès (43 Ko)
+[2026-11-13 20:31:28 UTC] ===== FIN NORMALE =====
