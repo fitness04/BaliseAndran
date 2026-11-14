@@ -2,7 +2,7 @@ name: Balise Andran
 
 on:
   workflow_dispatch:
- 
+
 permissions:
   contents: write
 
@@ -28,15 +28,12 @@ jobs:
           GH_REPO: ${{ github.repository }}
         run: |
           mkdir -p models
-
           gh release download Voix-Piper-Andran \
             --pattern "model.onnx" \
             --pattern "model.onnx.json" \
             --dir models \
             --clobber
-
-          echo "=== Fichiers téléchargés ==="
-          ls -lh models/   
+          ls -lh models/
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -52,71 +49,56 @@ jobs:
 
       - name: Vérifier les fichiers et les outils
         run: |
-          echo "=== Dossier de travail ==="
           pwd
-
-          echo "=== Vérification des fichiers ==="
-          manque=0
-
-          for fichier in \
-            scripts/balise_andran.py \
-            models/model.onnx \
-            models/model.onnx.json
-          do
-            if [ -f "$fichier" ]; then
-              echo "OK : $fichier"
-              ls -lh "$fichier"
-            else
-              echo "::error::Fichier absent : $fichier"
-              manque=1
-            fi
-          done
-
-          if [ "$manque" -ne 0 ]; then
-            exit 1
-          fi
-
-          echo "=== Vérification Piper ==="
+          test -s scripts/balise_andran.py
+          test -s models/model.onnx
+          test -s models/model.onnx.json
           python -m piper --help
-
-          echo "=== Vérification FFmpeg ==="
           ffmpeg -version
 
       - name: Générer le bulletin
         env:
           PYTHONUNBUFFERED: "1"
+          PIPER_MODEL: ${{ github.workspace }}/models/model.onnx
+          FFMPEG: ffmpeg
         run: python scripts/balise_andran.py
 
       - name: Vérifier le résultat
         run: |
           test -s BaliseAndran.mp3
           test -s phrase.txt
-          ls -lh BaliseAndran.mp3
+          test -s bulletin.json
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          meta = json.loads(Path("bulletin.json").read_text(encoding="utf-8"))
+          audio = Path("BaliseAndran.mp3").read_bytes()
+          assert meta["schema"] == 1
+          assert meta["station_id"] == 2031
+          assert isinstance(meta["valid"], bool)
+          assert meta["mp3_bytes"] == len(audio)
+          assert meta["mp3_sha256"] == hashlib.sha256(audio).hexdigest()
+          print(json.dumps(meta, indent=2))
+          PY
+          ls -lh BaliseAndran.mp3 bulletin.json
           cat phrase.txt
 
       - name: Enregistrer le bulletin dans le dépôt
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-
-          echo "=== État des fichiers avant enregistrement ==="
           git status --short
-
           git add -- \
             BaliseAndran.mp3 \
             phrase.txt \
-            bulletin.txt \
+            bulletin.json \
             balise_andran.log
-
           if git diff --cached --quiet; then
             echo "Aucune modification du bulletin à enregistrer."
             exit 0
           fi
-
           git commit -m "Update bulletin"
-
-          echo "=== Modifications restantes ==="
           git status --short
-
           git pull --rebase --autostash origin main
           git push origin main
