@@ -1014,3 +1014,14 @@
 [2026-11-15 06:02:03 UTC] MP3 genere avec succes (46150 octets)
 [2026-11-15 06:02:03 UTC] SHA256 : 8b243ca77a2b3243bbe2e502ecc8dd8adbc1a7b61ef5fafea41a2d481e27398b
 [2026-11-15 06:02:03 UTC] ===== FIN NORMALE =====
+[2026-11-15 06:16:03 UTC] ===== DEMARRAGE V4 =====
+[2026-11-15 06:16:03 UTC] Dossier de travail : /home/runner/work/BaliseAndran/BaliseAndran
+[2026-11-15 06:16:03 UTC] Lecture balise WindBird 2031
+[2026-11-15 06:16:04 UTC] Heure mesure : 15/11/2026 06:11:51 UTC
+[2026-11-15 06:16:04 UTC] Age mesure = 4.2 minutes
+[2026-11-15 06:16:04 UTC] Direction=45 deg Vent=3 km/h Rafale=8 km/h
+[2026-11-15 06:16:04 UTC] Etat mesure : VALIDE
+[2026-11-15 06:16:04 UTC] Phrase : Balise de l'Andran, nord èst, 3 kilomètre heure, 8 maximum.
+[2026-11-15 06:16:04 UTC] MP3 genere avec succes (44583 octets)
+[2026-11-15 06:16:04 UTC] SHA256 : 100dce4b0d1ba88fc8432ec4f521591633042241570d70ba249104dc5c15e809
+[2026-11-15 06:16:04 UTC] ===== FIN NORMALE =====
