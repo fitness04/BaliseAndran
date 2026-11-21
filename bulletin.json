@@ -2,9 +2,9 @@
   "schema": 1,
   "station_id": 2031,
   "valid": true,
-  "measurement_epoch": 1795235225,
-  "generated_epoch": 1795235482,
+  "measurement_epoch": 1795235828,
+  "generated_epoch": 1795236368,
   "max_age_seconds": 1800,
-  "mp3_bytes": 52576,
-  "mp3_sha256": "e9844a3b2f14a24cf84938f0b6c40401056414d249a7a7058039bb190a90bb4b"
+  "mp3_bytes": 46150,
+  "mp3_sha256": "96810e7bdc0ef063390ad9f31a2032c6e04fd2f219ac2c58d337a1e04e607144"
 }
